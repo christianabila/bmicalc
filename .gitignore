@@ -1,0 +1,5 @@
+vendor/
+composer.json
+.settings/
+.project
+.DS_Store
