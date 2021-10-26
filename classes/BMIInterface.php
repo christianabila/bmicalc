@@ -15,5 +15,5 @@ interface BMIInterface
 	 * Returns the dimension of the calculated BMI.
 	 * @return string The dimension.
 	 */
-	public function getFunction();
+	public function getDimension();
 }
