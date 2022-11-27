@@ -2,7 +2,7 @@
 
 namespace BMICalc\Classes;
 
-class BMIEmpirical extends BMI implements BMIInterface
+class BMIImperial extends BMI implements BMIInterface
 {
 	private const DIMENSION = "lbs/inch<sup>2</sup>";
 	/**
