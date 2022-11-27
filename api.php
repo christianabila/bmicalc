@@ -7,9 +7,9 @@ namespace BMICalc;
 	// current values for selection
 	// 1 - metric
 	// 2 - empiric
-	if(isset($_POST['selection']))
+	if(isset($_POST['selectedTab']))
 	{
-		$_SESSION['selection'] = $_POST['selection'];
+		$_SESSION['selectedTab'] = $_POST['selectedTab'];
 		// if tab = 1 convert from empiric to metric
 		// if tab = 2 convert from metric to empiric
 		
@@ -22,7 +22,7 @@ namespace BMICalc;
 		 * 
 		 * ft = inch * 0,083333
 		 * */
-		if($_POST['selection'] == 1) {
+		if($_POST['selectedTab'] == 1) {
 			$_SESSION['height'] = $_POST['height']*2.54;
 			$_SESSION['weight'] = $_POST['weight']*0.45359;	
 		}

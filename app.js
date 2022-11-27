@@ -11,7 +11,7 @@ function changeSelection(tab)
 	 $.ajax({
         type: "POST",
         url: "api.php",
-        data: {selection:tab, mass:mass, height:height},
+        data: {selectedTab:tab, mass:mass, height:height},
         success: function(data)
         {
             
