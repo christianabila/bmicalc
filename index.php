@@ -14,35 +14,32 @@ include_once 'config.php';
 if(!isset($_SESSION['selection']))
 	$_SESSION['selection'] = 1;
 
-try
-{  
-    if(isset($_POST['weight']) && is_numeric($_POST['weight']) && isset($_POST['height']) && is_numeric($_POST['height']))
-    {       
+try {  
+    if(isset($_POST['weight']) && is_numeric($_POST['weight']) && isset($_POST['height']) && is_numeric($_POST['height'])) {       
         $_SESSION['weight'] = $_POST['weight'];
         $_SESSION['height'] = $_POST['height'];
         
-        if($_POST['height'] === "0")
-            throw new \Exception("Can't divide by zero!"); 
+        if($_POST['height'] === "0") {
+            throw new \Exception("Can't divide by zero!");
+        }
         
         $_SESSION['bmi'] = round($_POST['weight']/(($_POST['height']*$_POST['height'])/10000), 1);
-        $_SESSION['dimension'] = "kg/m<sup>2</sup> ";
+        $_SESSION['dimension'] = "kg/m<sup>2</sup>";
         
         header('Location: '.$_SERVER['PHP_SELF']);
         exit;
-    }
-    
-    else if(isset($_POST['weightEmp']) && isset($_POST['heightFt']) && isset($_POST['heightInch']))
-    {
+    } elseif(isset($_POST['weightEmp']) && isset($_POST['heightFt']) && isset($_POST['heightInch'])) {
         $_SESSION['weightEmp'] = $_POST['weightEmp'];
         $_SESSION['heightFt'] = $_POST['heightFt'];
         $_SESSION['heightInch'] = $_POST['heightInch'];
         
-        if(($_POST['heightFt']*12 + $_POST['heightInch']) == 0)
-            throw new \Exception("Can't divide by zero!"); 
+        if(($_POST['heightFt']*12 + $_POST['heightInch']) == 0) {
+            throw new \Exception("Can't divide by zero!");
+        }
         
         $height = $_POST['heightFt']*12 + $_POST['heightInch'];
         
-        $_SESSION['bmi'] = round(($_POST['weightEmp']/($height*$height))*703, 1);
+        $_SESSION['bmi'] = round(($_POST['weightEmp'] / ($height * $height)) * 703, 1);
         $_SESSION['dimension'] = "lbs/inch";
     }
 } catch(\Exception $e) {
