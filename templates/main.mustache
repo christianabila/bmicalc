@@ -16,16 +16,16 @@
                 <div class="col">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a data-toggle="tab" class="nav-link <?=(isset($_SESSION['selection']) && $_SESSION['selection'] == 1 ? 'active': '' )?>" href="#metric" onclick="changeSelection(1)">Metrisch</a>
+                            <a data-toggle="tab" class="nav-link {{#selectedTab}}active{{/selectedTab}}" href="#metric" onclick="changeSelection({{selectedTab}})">Metrisch</a>
                         </li>
                         <li class="nav-item">
-                            <a data-toggle="tab" class="nav-link <?=(isset($_SESSION['selection']) && $_SESSION['selection'] == 2 ? 'active': '' )?>" href="#empirical" onclick="changeSelection(2)">Empirisch</a>
+                            <a data-toggle="tab" class="nav-link {{^selectedTab}}active{{/selectedTab}}" href="#empirical" onclick="changeSelection({{selectedTab}})">Empirisch</a>
                         </li>
                     </ul>
                     
                     <div class="tab-content">
-                        <div id="metric" class="tab-pane container <?=(isset($_SESSION['selection']) && $_SESSION['selection'] == 1 ? 'active': '' )?>">
-                            <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+                        <div id="metric" class="tab-pane container {{#selectedTab}}active{{/selectedTab}}">
+                            <form action="{{action}}" method="post">
                                 <div class="form-group">
                                     <label for="weight">Gewicht (kg):</label>
                                     <input type="number" name="weight" min="0.0" step="0.1" class="form-control" value="<?php if(isset($_SESSION['weight'])) echo $_SESSION['weight']; ?>">   
@@ -38,8 +38,8 @@
                             </form>
                         </div>
                         
-                        <div id="empirical" class="tab-pane container <?=(isset($_SESSION['selection']) && $_SESSION['selection'] == 2 ? 'active': '' )?>">
-                            <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+                        <div id="empirical" class="tab-pane container {{^selectedTab}}active{{/selectedTab}}">
+                            <form action="{{action}}" method="post">
                                 <div class="form-group">
                                     <label for="weightEmp">Gewicht (lbs):</label>
                                     <input type="number" name="weightEmp" min="0.0" step="0.1" class="form-control" value="<?php if(isset($_SESSION['weightEmp'])) echo $_SESSION['weightEmp']; ?>">   
