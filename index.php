@@ -4,6 +4,9 @@ namespace BMICalc;
 
 require(__DIR__."/vendor/autoload.php");
 
+use Mustache_Engine;
+use Mustache_Loader_FilesystemLoader;
+
 session_start();
 
 include_once 'config.php';
