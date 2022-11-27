@@ -6,12 +6,12 @@ namespace BMICalc;
 	
 	// current values for selection
 	// 1 - metric
-	// 2 - empiric
+	// 2 - imperial
 	if(isset($_POST['selectedTab']))
 	{
 		$_SESSION['selectedTab'] = $_POST['selectedTab'];
-		// if tab = 1 convert from empiric to metric
-		// if tab = 2 convert from metric to empiric
+		// if tab = 1 convert from imperial to metric
+		// if tab = 2 convert from metric to imperial
 		
 		/*
 		 * 1 lbs = 0.45359 kg

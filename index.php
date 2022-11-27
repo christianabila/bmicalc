@@ -28,8 +28,8 @@ try {
         
         header('Location: '.$_SERVER['PHP_SELF']);
         exit;
-    } elseif(isset($_POST['weightEmp']) && isset($_POST['heightFt']) && isset($_POST['heightInch'])) {
-        $_SESSION['weightEmp'] = $_POST['weightEmp'];
+    } elseif(isset($_POST['weightImperial']) && isset($_POST['heightFt']) && isset($_POST['heightInch'])) {
+        $_SESSION['weightImperial'] = $_POST['weightImperial'];
         $_SESSION['heightFt'] = $_POST['heightFt'];
         $_SESSION['heightInch'] = $_POST['heightInch'];
         
@@ -39,7 +39,7 @@ try {
         
         $height = $_POST['heightFt']*12 + $_POST['heightInch'];
         
-        $_SESSION['bmi'] = round(($_POST['weightEmp'] / ($height * $height)) * 703, 1);
+        $_SESSION['bmi'] = round(($_POST['weightImperial'] / ($height * $height)) * 703, 1);
         $_SESSION['dimension'] = "lbs/inch";
     }
 } catch(\Exception $e) {
@@ -78,7 +78,7 @@ if(isset($_SESSION['bmi'])) {
         unset($_SESSION['weight']);
         unset($_SESSION['height']);   
     } elseif(isset($_SESSION['heightFt'])) {
-        unset($_SESSION['weightEmp']);
+        unset($_SESSION['weightImperial']);
         unset($_SESSION['heightFt']);
         unset($_SESSION['heightInch']);
     }
@@ -92,7 +92,7 @@ $contextVariables = [
     'selectedTab' => isset($_SESSION['selectedTab']) ? $_SESSION['selectedTab'] : 1,
     'weight' => isset($_SESSION['weight']) ? $_SESSION['weight'] : '',
     'height' => isset($_SESSION['height']) ? $_SESSION['height'] : '',
-    'weightEmpirical' => isset($_SESSION['weightEmp']) ? $_SESSION['weightEmp'] : '',
+    'weightImperial' => isset($_SESSION['weightImperial']) ? $_SESSION['weightImperial'] : '',
     'heightFt' => isset($_SESSION['heightFt']) ? $_SESSION['heightFt'] : '',
     'heightInch' => isset($_SESSION['heightInch']) ? $_SESSION['heightInch'] : '',
     'underweight' => isset($underweight) ? $underweight : '',
@@ -108,7 +108,7 @@ if(isset($_SESSION['bmi'])) {
     unset($_SESSION['bmi']);
     unset($_SESSION['weight']);
     unset($_SESSION['height']);
-    unset($_SESSION['weightEmp']);
+    unset($_SESSION['weightImperial']);
     unset($_SESSION['heightFt']);
     unset($_SESSION['heightInch']);
     unset($_SESSION['dimension']);

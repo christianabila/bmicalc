@@ -5,7 +5,7 @@
 function changeSelection(tab)
 {
 	//get the mass of the tab before the tab change
-	var mass = (tab == 1 ? Number($("input[name='weightEmp']").val()) : Number($("input[name='weight']").val()));
+	var mass = (tab == 1 ? Number($("input[name='weightImperial']").val()) : Number($("input[name='weight']").val()));
 	var height = (tab == 1 ? Number($("input[name='heightFt']").val())*12 + Number($("input[name='heightInch']").val()) : Number($("input[name='height']").val()));
 	
 	 $.ajax({
