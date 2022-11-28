@@ -39,10 +39,6 @@ abstract class BMI
         if (isset($this->weight)) {
             return $this->weight;
         }
-        
-        else 
-			throw new BMIException("Weight must be a numeric and greater than zero!");
-	}
 
         throw new BMIException('Weight does not have a value!');
     }
