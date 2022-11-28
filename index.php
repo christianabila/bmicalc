@@ -6,6 +6,7 @@ require __DIR__ . "/vendor/autoload.php";
 
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
+use Exception;
 
 session_start();
 
@@ -21,7 +22,7 @@ try {
         $_SESSION['height'] = $_POST['height'];
 
         if ($_POST['height'] === "0") {
-            throw new \Exception("Can't divide by zero!");
+            throw new Exception("Can't divide by zero!");
         }
 
         $_SESSION['bmi'] = round($_POST['weight'] / (($_POST['height'] * $_POST['height']) / 10000), 1);
@@ -35,7 +36,7 @@ try {
         $_SESSION['heightInch'] = $_POST['heightInch'];
 
         if (($_POST['heightFt'] * 12 + $_POST['heightInch']) == 0) {
-            throw new \Exception("Can't divide by zero!");
+            throw new Exception("Can't divide by zero!");
         }
 
         $height = $_POST['heightFt'] * 12 + $_POST['heightInch'];
@@ -43,7 +44,7 @@ try {
         $_SESSION['bmi'] = round(($_POST['weightImperial'] / ($height * $height)) * 703, 1);
         $_SESSION['dimension'] = "lbs/inch";
     }
-} catch (\Exception $e) {
+} catch (Exception $e) {
     $_SESSION['error'] = $e->getMessage();
 
     header('Location: ' . $_SERVER['PHP_SELF']);

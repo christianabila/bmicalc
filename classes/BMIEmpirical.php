@@ -2,6 +2,8 @@
 
 namespace BMICalc\Classes;
 
+use Exception;
+
 class BMIImperial extends BMI implements BMIInterface
 {
     private const DIMENSION = "lbs/inch<sup>2</sup>";
