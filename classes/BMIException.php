@@ -2,7 +2,9 @@
 
 namespace BMICalc\Classes;
 
-class BMIException extends \Exception
+use Exception;
+
+class BMIException extends Exception
 {
 
 }
