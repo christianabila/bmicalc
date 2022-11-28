@@ -16,7 +16,7 @@ class Memento
 
     public function __construct($height, $weight, $bmi, $system)
     {
-        
+
     }
 
     public function getHeight()
@@ -41,8 +41,7 @@ class Memento
 
     public function setHeight($height)
     {
-        if(is_numeric($height) && intval($height) > 0)
-        {
+        if (is_numeric($height) && intval($height) > 0) {
             $this->height = intval($height);
             return true;
         }
@@ -52,8 +51,7 @@ class Memento
 
     public function setWeight($weight)
     {
-        if(is_numeric($weight) && floatval($weight) > 0)
-        {
+        if (is_numeric($weight) && floatval($weight) > 0) {
             $this->weight = floatval($weight);
             return true;
         }
@@ -63,8 +61,7 @@ class Memento
 
     public function setBmi($bmi)
     {
-        if(is_numeric($bmi) && floatval($bmi) > 0)
-        {
+        if (is_numeric($bmi) && floatval($bmi) > 0) {
             $this->bmi = floatval($bmi);
             return true;
         }
@@ -74,8 +71,7 @@ class Memento
 
     public function setSystem($system)
     {
-        if(is_string($system))
-        {
+        if (is_string($system)) {
             $this->system = $system;
             return true;
         }
