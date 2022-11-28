@@ -2,7 +2,7 @@
 
 namespace BMICalc;
 
-require(__DIR__."/vendor/autoload.php");
+require __DIR__ . "/vendor/autoload.php";
 
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
@@ -11,50 +11,51 @@ session_start();
 
 include_once 'config.php';
 
-if(!isset($_SESSION['selection']))
-	$_SESSION['selection'] = 1;
+if (!isset($_SESSION['selection'])) {
+    $_SESSION['selection'] = 1;
+}
 
-try {  
-    if(isset($_POST['weight']) && is_numeric($_POST['weight']) && isset($_POST['height']) && is_numeric($_POST['height'])) {       
+try {
+    if (isset($_POST['weight']) && is_numeric($_POST['weight']) && isset($_POST['height']) && is_numeric($_POST['height'])) {
         $_SESSION['weight'] = $_POST['weight'];
         $_SESSION['height'] = $_POST['height'];
-        
-        if($_POST['height'] === "0") {
+
+        if ($_POST['height'] === "0") {
             throw new \Exception("Can't divide by zero!");
         }
-        
-        $_SESSION['bmi'] = round($_POST['weight']/(($_POST['height']*$_POST['height'])/10000), 1);
+
+        $_SESSION['bmi'] = round($_POST['weight'] / (($_POST['height'] * $_POST['height']) / 10000), 1);
         $_SESSION['dimension'] = "kg/m<sup>2</sup>";
-        
-        header('Location: '.$_SERVER['PHP_SELF']);
+
+        header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
-    } elseif(isset($_POST['weightImperial']) && isset($_POST['heightFt']) && isset($_POST['heightInch'])) {
+    } elseif (isset($_POST['weightImperial']) && isset($_POST['heightFt']) && isset($_POST['heightInch'])) {
         $_SESSION['weightImperial'] = $_POST['weightImperial'];
         $_SESSION['heightFt'] = $_POST['heightFt'];
         $_SESSION['heightInch'] = $_POST['heightInch'];
-        
-        if(($_POST['heightFt']*12 + $_POST['heightInch']) == 0) {
+
+        if (($_POST['heightFt'] * 12 + $_POST['heightInch']) == 0) {
             throw new \Exception("Can't divide by zero!");
         }
-        
-        $height = $_POST['heightFt']*12 + $_POST['heightInch'];
-        
+
+        $height = $_POST['heightFt'] * 12 + $_POST['heightInch'];
+
         $_SESSION['bmi'] = round(($_POST['weightImperial'] / ($height * $height)) * 703, 1);
         $_SESSION['dimension'] = "lbs/inch";
     }
-} catch(\Exception $e) {
-    $_SESSION['error'] = $e->getMessage();   
-    
-    header('Location: '.$_SERVER['PHP_SELF']);
+} catch (\Exception $e) {
+    $_SESSION['error'] = $e->getMessage();
+
+    header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
 }
 
 $mustacheEngine = new Mustache_Engine([
     'entity_flags' => ENT_QUOTES,
-    'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/templates'),
+    'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates'),
 ]);
 
-if(isset($_SESSION['bmi'])) {
+if (isset($_SESSION['bmi'])) {
     $bmi10 = $_SESSION['bmi'] * 10;
 
     if ($bmi10 < 185) {
@@ -70,14 +71,14 @@ if(isset($_SESSION['bmi'])) {
     } elseif ($bmi10 >= 400) {
         $obese3 = 'green';
     }
-} elseif(isset($_SESSION['error'])) {
+} elseif (isset($_SESSION['error'])) {
     echo $_SESSION['error'];
     unset($_SESSION['error']);
-    
-    if(isset($_SESSION['height'])) {
+
+    if (isset($_SESSION['height'])) {
         unset($_SESSION['weight']);
-        unset($_SESSION['height']);   
-    } elseif(isset($_SESSION['heightFt'])) {
+        unset($_SESSION['height']);
+    } elseif (isset($_SESSION['heightFt'])) {
         unset($_SESSION['weightImperial']);
         unset($_SESSION['heightFt']);
         unset($_SESSION['heightInch']);
@@ -104,7 +105,7 @@ $contextVariables = [
 ];
 echo $mustacheEngine->render('main', $contextVariables);
 
-if(isset($_SESSION['bmi'])) {
+if (isset($_SESSION['bmi'])) {
     unset($_SESSION['bmi']);
     unset($_SESSION['weight']);
     unset($_SESSION['height']);
@@ -113,4 +114,3 @@ if(isset($_SESSION['bmi'])) {
     unset($_SESSION['heightInch']);
     unset($_SESSION['dimension']);
 }
-?>
